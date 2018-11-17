@@ -6,11 +6,18 @@
 from IPython.display import Image
 from sklearn import datasets
 import numpy as np
+import pandas as pd
+from sklearn.preprocessing import LabelEncoder
 
-iris = datasets.load_iris()
-X = iris.data[:, [2, 3]]
-y = iris.target
+iris = pd.read_csv("E:\PyCharm code\Data\iris.data.txt", header=None)
+X = iris.iloc[:, [2, 3]].values
+y = iris.iloc[:, [4]].values
 
+y = y.flatten()
+le = LabelEncoder()
+le.fit(y)
+y = le.transform(y)
+print(X.shape, y.shape)
 # X.shape, y.shape
 
 # Splitting data into 70% training and 30% test data:
